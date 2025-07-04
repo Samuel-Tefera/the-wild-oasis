@@ -7,6 +7,7 @@ export default function CabinTableOperations() {
   return (
     <TableOperations>
       <Filter
+        filterField="discount"
         options={[
           { label: 'All', value: 'all' },
           { label: 'No discount', value: 'no-discount' },
