@@ -5,6 +5,7 @@ import Table from '../../ui/Table';
 import CabinRow from './CabinRow';
 
 import { useCabins } from './useCabins';
+import Empty from '../../ui/Empty';
 
 export default function CabinTable() {
   const { isLoading, cabins } = useCabins();
@@ -30,6 +31,8 @@ export default function CabinTable() {
   );
 
   if (isLoading) return <Spinner />;
+
+  if (!cabins || cabins.length === 0) return <Empty resource="cabins" />;
 
   return (
     <Menus>
