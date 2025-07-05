@@ -22,7 +22,6 @@ export function useBookings() {
 
   // PAGING
   const page = +searchParams.get('page') || 1;
-  console.log(page);
 
   const { isLoading, data } = useQuery({
     queryKey: ['bookings', filter, sortBy, page],
