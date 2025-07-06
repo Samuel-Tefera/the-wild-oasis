@@ -15,6 +15,7 @@ import AppLayout from './ui/AppLayout';
 import GlobalStyles from './styles/GlobalStyles';
 import Bookings from './pages/Bookings';
 import Booking from './pages/Booking';
+import Checkin from './pages/Checkin';
 
 const queryClinet = new QueryClient({
   defaultOptions: {
@@ -34,13 +35,14 @@ export default function App() {
           <Route element={<AppLayout />}>
             <Route index element={<Navigate replace to="/dashboard" />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="login" element={<Login />} />
+            <Route path="bookings" element={<Bookings />} />
+            <Route path="bookings/:bookingId" element={<Booking />} />
+            <Route path="checkin/:bookingId" element={<Checkin />} />
             <Route path="cabins" element={<Cabins />} />
             <Route path="users" element={<Users />} />
             <Route path="settings" element={<Settings />} />
             <Route path="account" element={<Account />} />
-            <Route path="bookings" element={<Bookings />} />
-            <Route path="bookings/:bookingId" element={<Booking />} />
+            <Route path="login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
