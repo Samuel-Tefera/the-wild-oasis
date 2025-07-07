@@ -40,6 +40,13 @@ export default function Filter({ filterField, options }) {
 
   function handleClick(value) {
     searchParams.set(filterField, value);
+
+    // Remove Page
+    const page = searchParams.get('page');
+    if (page) {
+      searchParams.set('page', 1);
+    }
+
     setSearchParams(searchParams);
   }
 
