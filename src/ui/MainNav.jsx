@@ -64,7 +64,7 @@ export default function MainNav() {
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/booking">
+          <StyledNavLink to="/bookings">
             <HiOutlineCalendar />
             <span>Bookings</span>
           </StyledNavLink>
