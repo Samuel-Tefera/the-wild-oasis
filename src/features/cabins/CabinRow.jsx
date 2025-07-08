@@ -76,7 +76,11 @@ export default function CabinRow({ cabin }) {
             <Menus.Toggle id={cabinId} />
 
             <Menus.List id={cabinId}>
-              <Menus.Button onClick={handleDuplicate} icon={<HiSquare2Stack />}>
+              <Menus.Button
+                onClick={handleDuplicate}
+                icon={<HiSquare2Stack />}
+                disabled={isCreating}
+              >
                 Duplicate
               </Menus.Button>
 
