@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import {
+  HiArrowDownOnSquare,
+  HiArrowUpOnSquare,
+  HiTrash,
+} from 'react-icons/hi2';
+import toast from 'react-hot-toast';
 
 import BookingDataBox from './BookingDataBox';
 import Row from '../../ui/Row';
@@ -12,9 +18,10 @@ import ButtonText from '../../ui/ButtonText';
 
 import { useMoveBack } from '../../hooks/useMoveBack';
 import useBooking from './useBooking';
-import toast from 'react-hot-toast';
-import { HiArrowDownOnSquare, HiArrowUpOnSquare } from 'react-icons/hi2';
 import useCheckout from '../check-in-out/useCheckout';
+import { useDeleteBooking } from './useDeleteBooking';
+import ConfirmDelete from '../../ui/ConfirmDelete';
+import Modal from '../../ui/Modal';
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -25,6 +32,7 @@ const HeadingGroup = styled.div`
 function BookingDetail() {
   const { booking, isLoading, error } = useBooking();
   const { isCheckingOut, checkout } = useCheckout();
+  const { isDeleting, deleteBooking } = useDeleteBooking();
 
   const { status, id: bookingId } = booking || {};
 
@@ -70,12 +78,31 @@ function BookingDetail() {
                 onClick={() => {
                   checkout(bookingId);
                 }}
-                icon={<HiArrowUpOnSquare />}
                 disabled={isCheckingOut}
               >
+                <HiArrowUpOnSquare />
                 {`Check out booking #${bookingId}`}
               </Button>
             )}
+            <Modal>
+              <Modal.Open opens="confirm-delete-booking">
+                <Button variation="danger">
+                  <HiTrash />
+                  Delete
+                </Button>
+              </Modal.Open>
+              <Modal.Window name="confirm-delete-booking">
+                <ConfirmDelete
+                  resourceName="booking"
+                  onConfirm={() => {
+                    deleteBooking(bookingId, {
+                      onSettled: () => navigate(-1),
+                    });
+                  }}
+                  disabled={isDeleting}
+                />
+              </Modal.Window>
+            </Modal>
             <Button variation="secondary" onClick={moveBack}>
               Back
             </Button>
