@@ -16,7 +16,6 @@ const FullPage = styled.div`
 export default function ProtectedRoute({ children }) {
   const { isAuthenticated, isLoading } = useUser();
   const navigate = useNavigate();
-  console.log(isAuthenticated, isLoading);
 
   const queryClient = useQueryClient();
 
